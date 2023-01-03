@@ -1,0 +1,275 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "description": "to be added",
+      "title": "Click_invetory"
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+    "tags": [
+      {
+        "name": "any",
+        "description": "any Endpoints"
+      },
+      {
+        "name": "any2",
+        "description": "any2 Endpoints"
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
+    "paths": {
+      "/api/any/route": {
+        "post": {
+          "tags": [
+            "any"
+          ],
+          "summary": "any post route",
+          "description": "description here",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/anypost"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "successfull"
+            },
+            "422": {
+              "description": "validation error!"
+            },
+            "500": {
+              "description": "SERVER_ERROR"
+            }
+          }
+        }
+      },
+    "/api/any/getroute": {
+        "get": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "any"
+          ],
+          "summary": "Get any route",
+          "description": "description",
+          "responses": {
+            "200": {
+              "description": "successfull"
+            },
+            "401": {
+              "description": "AUTHENTICATION_ERROR"
+            },
+            "500": {
+              "description": "Server Error"
+            }
+          }
+        }
+    },
+    "/api/any/{id}": {
+      "get": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "any"
+        ],
+        "summary": "Get single any",
+        "description": "A user get a single user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "any Id",
+            "required": true,
+            "example": "622709d12c9ac2b4141a218f"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successfully"
+          },
+          "404": {
+            "description": "not found"
+          },
+          "401": {
+            "description": "AUTHENTICATION_ERROR"
+          },
+          "500": {
+            "description": "SERVER_ERROR"
+          }
+        }
+      }
+    },
+    "/api/user/put route": {
+        "put": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "any2"
+          ],
+          "summary": "put route",
+          "description": "description here",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "first field": {
+                      "type": "string",
+                      "description": "description here",
+                      "example": "Rashford!0"
+                    },
+                    "second field": {
+                      "type": "string",
+                      "description": "description here",
+                      "example": "Password!0"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "successfull"
+            },
+            "400": {
+                "description": "bad request"
+              },
+            "401": {
+              "description": "AUTHENTICATION_ERROR"
+            },
+            "422": {
+                "description": "validation error!"
+              },
+            "500": {
+              "description": "SERVER_ERROR"
+            }
+          }
+        }
+      },
+      "/api/any2/add": {
+        "post": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "any2"
+          ],
+          "summary": "add",
+          "description": "requires token",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/anypost2"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "successfully"
+            },
+            "401": {
+              "description": "AUTHENTICATION_ERROR"
+            },
+            "409": {
+              "description": "Project already exist!"
+            },
+            "500": {
+              "description": "SERVER_ERROR"
+            }
+          }
+        }
+      }
+},
+    "definitions": {
+        "anypost": {
+          "required": [
+            "email",
+            "password",
+            "username",
+            "fullName",
+            "phone"
+          ],
+          "type": "object",
+          "properties": {
+            "email": {
+              "type": "string",
+              "description": "your email",
+              "example": "rashford@gmail.com"
+            },
+            "username": {
+              "type": "string",
+              "description": "username must be between 3 and 25 characters with no special character except _ and .",
+              "example": "man_utd"
+            },
+            "fullName": {
+              "type": "string",
+              "description": "your fullName",
+              "example": "Marcus Rashford"
+            },
+            "phone": {
+              "type": "string",
+              "description": "your Rwandan phone number starting with 250",
+              "example": "250788888888"
+            },
+            "password": {
+              "type": "string",
+              "description": "Password with uppercase,lowercase,number,special character and length above or equal to 6",
+              "example": "Password!0"
+            }
+          }
+        },
+        "any2": {
+          "required": [
+            "account",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "account": {
+              "type": "string",
+              "description": "your email or your username",
+              "example": "rashford@gmail.com"
+            },
+            "password": {
+              "type": "string",
+              "description":"your password",
+              "example": "Password!0"
+            }
+          }
+        }
+  }
+}
