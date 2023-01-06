@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     //associations with category model
     static associate({ Category }) {
-      this.belongsTo(Category, { foreignKey: 'categoryId', as: 'category' });
+      this.belongsTo(Category, { foreignKey: 'categoryid', as: 'category' });
     }
     toJSON() {
       return {
@@ -24,6 +24,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+      },
+      categoryid: {
+        type: DataTypes.UUID,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,

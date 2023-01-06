@@ -2,7 +2,7 @@ import model from '../database/models';
 
 const Category = model.Category;
 
-export const createCategory = async (req, res, next) => {
+export const createCategory = async (req, res) => {
   try {
     const { name, description } = req.body;
 
@@ -42,7 +42,7 @@ export const createCategory = async (req, res, next) => {
   }
 };
 
-export const getAllCategories = async (req, res, next) => {
+export const getAllCategories = async (req, res) => {
   try {
     const categories = await Category.findAll();
 
@@ -88,7 +88,7 @@ export const getCategory = async (req, res, next) => {
   }
 };
 
-export const updateCategory = async (req, res, next) => {
+export const updateCategory = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description } = req.body;

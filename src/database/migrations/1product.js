@@ -1,11 +1,15 @@
 'use strict';
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable('category', {
-      uuid: {
+    await queryInterface.createTable('product', {
+      productid: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+      },
+      categoryid: {
+        type: DataTypes.UUID,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -15,7 +19,18 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-
+      base_price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
+      sale_price: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
@@ -31,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('category');
+    await queryInterface.dropTable('product');
   },
 };
