@@ -1,7 +1,7 @@
 {
-  "name": "tipme_backend",
+  "name": "click_bar_backend",
   "version": "1.0.0",
-  "description": "A tipping app api",
+  "description": "click_bar app api",
   "engines": {
     "node": "16.15.0"
   },
