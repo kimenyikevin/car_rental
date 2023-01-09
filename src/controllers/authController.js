@@ -59,7 +59,6 @@ export const signIn = async (req, res, next) => {
      * Get user email and password
      */
     const { email, password } = req.body;
-
     if (!email || !password) {
       return res.status(400).json({
         status: 'fail',

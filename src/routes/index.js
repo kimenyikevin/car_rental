@@ -5,7 +5,7 @@ import product from './product';
 
 const router = express.Router();
 
-router.use('/user', userRouter);
+router.use('/users', userRouter);
 router.use('/category', category);
 router.use('/product', product);
 
