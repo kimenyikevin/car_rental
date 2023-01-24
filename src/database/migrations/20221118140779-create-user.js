@@ -27,13 +27,16 @@ module.exports = {
         type: DataTypes.STRING,
         defaultValue: '',
       },
-      isActivated: {
+      isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      isAdmin: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+      roleId: {
+        type: DataTypes.INTEGER,
+      },
+      roleName: {
+        type: DataTypes.STRING,
+        defaultValue: 'Basic',
       },
       createdAt: {
         allowNull: false,

@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use(cors());
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
-app.use('/api', routes);
+app.use('/api/v1', routes);
 
 export default app;
