@@ -63,8 +63,8 @@ export const getAllCategories = async (req, res) => {
 
 export const getCategory = async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const category = await Category.findOne({ where: { id } });
+    const { categoryid } = req.params;
+    const category = await Category.findOne({ where: { categoryid } });
 
     if (!category) {
       return res.status(404).json({
@@ -90,10 +90,10 @@ export const getCategory = async (req, res, next) => {
 
 export const updateCategory = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { categoryid } = req.params;
     const { name, description } = req.body;
 
-    const category = await Category.findOne({ where: { id } });
+    const category = await Category.findOne({ where: { categoryid } });
 
     if (!category) {
       return res.status(404).json({
@@ -108,7 +108,7 @@ export const updateCategory = async (req, res) => {
         description: description || category.description,
       },
       {
-        where: { id },
+        where: { categoryid },
         returning: true,
         plain: true,
       },
