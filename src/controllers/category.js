@@ -131,9 +131,9 @@ export const updateCategory = async (req, res) => {
 
 export const deleteCategory = async (req, res, next) => {
   try {
-    const { id } = req.params;
+    const { categoryid } = req.params;
 
-    const category = await Category.findOne({ where: { id } });
+    const category = await Category.findOne({ where: { categoryid } });
 
     if (!category) {
       return res.status(404).json({
@@ -143,7 +143,7 @@ export const deleteCategory = async (req, res, next) => {
     }
 
     await Category.destroy({
-      where: { id },
+      where: { categoryid },
     });
 
     res.status(200).json({
