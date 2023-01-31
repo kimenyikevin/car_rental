@@ -63,11 +63,11 @@ export const updateUser = async (req, res) => {
     }
     //check if the user email is already in the database
 
-    const emailExist = await User.findOne({
-      where: {
-        email: req.body.email,
-      },
-    });
+    // const emailExist = await User.findOne({
+    //   where: {
+    //     email: req.body.email,
+    //   },
+    // });
     // if (emailExist) {
     //   console.log(emailExist);
     //   return res.status(400).json({
