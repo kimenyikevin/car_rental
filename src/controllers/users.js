@@ -46,3 +46,43 @@ export const getSingleUser = async (req, res) => {
     });
   }
 };
+
+//update a user
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      where: {
+        uuid: req.params.uuid,
+      },
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: 'error',
+        error: 'User not found',
+      });
+    }
+    //check if the user email is already in the database
+
+    const emailExist = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+    if (emailExist) {
+      return res.status(400).json({
+        status: 'error',
+        error: 'Email already exists',
+      });
+    }
+    const updatedUser = await user.update(req.body);
+    res.status(200).json({
+      status: 'success',
+      updatedUser,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      error: error.message,
+    });
+  }
+};
