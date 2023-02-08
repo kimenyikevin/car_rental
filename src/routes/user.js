@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { signup, signIn } from '../controllers/authController';
-import { Auth, admin } from '../utils/Authmiddleware';
+import { Auth, admin } from '../utils/middlewares/Authmiddleware';
 import {
   getAllUsers,
   getSingleUser,

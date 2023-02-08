@@ -1,4 +1,4 @@
-import model from '../database/models';
+import model from '../../database/models';
 import jwt from 'jsonwebtoken';
 
 const User = model.User;

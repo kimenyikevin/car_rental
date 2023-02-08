@@ -1,5 +1,5 @@
 import express from 'express';
-import { Auth } from '../utils/Authmiddleware';
+import { Auth } from '../utils/middlewares/Authmiddleware';
 import {
   createProduct,
   getAllProductsByCategory,
