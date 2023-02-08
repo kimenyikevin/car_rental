@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { Auth, admin } from '../utils/Authmiddleware';
 import {
   createRole,
   getAllRoles,
@@ -9,8 +9,12 @@ import {
 } from '../controllers/roles';
 const router = express.Router();
 
-router.post('/', createRole);
-router.get('/', getAllRoles);
-router.route('/:roleId').get(getRole).delete(deleteRole).put(updateRole);
+router.post('/', Auth, admin, createRole);
+router.get('/', Auth, admin, getAllRoles);
+router
+  .route('/:roleId')
+  .get(Auth, admin, getRole)
+  .delete(Auth, admin, deleteRole)
+  .put(Auth, admin, updateRole);
 
 export default router;
