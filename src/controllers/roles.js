@@ -87,3 +87,74 @@ export const getRole = async (req, res) => {
     });
   }
 };
+
+export const updateRole = async (req, res) => {
+  try {
+    const { roleId } = req.params;
+    const { roleName, description } = req.body;
+
+    const role = await Role.findOne({ where: { roleId } });
+
+    if (!role) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Role not found',
+      });
+    }
+
+    const updatedRole = await Role.update(
+      {
+        roleName: roleName || Role.roleName,
+        description: description || Role.description,
+      },
+      {
+        where: { roleId },
+        returning: true,
+        plain: true,
+      },
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        Role: updatedRole[1],
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Error while updating Role',
+      err: error.message,
+    });
+  }
+};
+
+export const deleteRole = async (req, res, next) => {
+  try {
+    const { roleId } = req.params;
+
+    const role = await Role.findOne({ where: { roleId } });
+
+    if (!role) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Role not found',
+      });
+    }
+
+    await role.destroy({
+      where: { roleId },
+    });
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Role deleted successfully',
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Error while deleting Role',
+      err: error.message,
+    });
+  }
+};
