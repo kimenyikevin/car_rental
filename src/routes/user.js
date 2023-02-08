@@ -13,6 +13,10 @@ const router = express.Router();
 router.post('/signup', signup);
 router.post('/signin', signIn);
 router.route('/').get(Auth, getAllUsers);
-router.route('/:uuid').get(getSingleUser).put(updateUser).delete(deleteUser);
+router
+  .route('/:uuid')
+  .get(Auth, getSingleUser)
+  .put(Auth, updateUser)
+  .delete(Auth, deleteUser);
 
 export default router;
