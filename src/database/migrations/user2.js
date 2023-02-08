@@ -1,23 +1,39 @@
 'use strict';
 module.exports = {
   async up(queryInterface, DataTypes) {
-    await queryInterface.createTable('roles', {
-      roleId: {
+    await queryInterface.createTable('users', {
+      uuid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIV4,
         primaryKey: true,
       },
-      roleName: {
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      lastName: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      passwordResetToken: {
+        type: DataTypes.STRING,
+        defaultValue: '',
       },
       isActive: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
+      },
+      roleId: {
+        type: DataTypes.UUID,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -30,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, DataTypes) {
-    await queryInterface.dropTable('roles');
+    await queryInterface.dropTable('users');
   },
 };

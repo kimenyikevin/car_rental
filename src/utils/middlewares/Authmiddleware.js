@@ -2,6 +2,7 @@ import model from '../../database/models';
 import jwt from 'jsonwebtoken';
 
 const User = model.User;
+const Role = model.Role;
 
 const Auth = async (req, res, next) => {
   let token;
@@ -12,10 +13,15 @@ const Auth = async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-      req.user = await await User.findOne({
+      const user = await User.findOne({
         where: {
           uuid: decoded.uuid,
+        },
+      });
+      req.user = user;
+      req.role = await Role.findOne({
+        where: {
+          roleId: user.roleId,
         },
       });
       next();
@@ -34,8 +40,8 @@ const Auth = async (req, res, next) => {
 
 const admin = (req, res, next) => {
   if (
-    (req.user && req.user.roleName === 'admin') ||
-    req.user.roleName === 'developer'
+    (req.role && req.role.roleName === 'admin') ||
+    req.role.roleName === 'developer'
   ) {
     next();
   } else {

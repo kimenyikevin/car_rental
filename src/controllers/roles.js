@@ -1,6 +1,6 @@
 import model from '../database/models';
 
-const Role = model.roles;
+const Role = model.Role;
 
 export const createRole = async (req, res) => {
   try {

@@ -2,6 +2,9 @@
 import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
+    static associate({ Role }) {
+      this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
+    }
     toJSON() {
       return {
         ...this.get(),
@@ -45,11 +48,8 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: true,
       },
       roleId: {
-        type: DataTypes.INTEGER,
-      },
-      roleName: {
-        type: DataTypes.STRING,
-        defaultValue: 'Basic',
+        type: DataTypes.UUID,
+        allowNull: false,
       },
     },
     {

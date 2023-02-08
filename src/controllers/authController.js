@@ -13,9 +13,9 @@ const signToken = (uuid) => {
 
 export const signup = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, roleId, password } = req.body;
 
-    if (!firstName || !lastName || !email || !password) {
+    if (!firstName || !lastName || !email || !roleId || !password) {
       return res.status(400).json({
         status: 'fail',
         message: 'Invalid request, Provide valid information',
@@ -35,6 +35,7 @@ export const signup = async (req, res, next) => {
       firstName,
       lastName,
       email,
+      roleId,
       password: await bcrypt.hash(password, 12),
     });
 
@@ -65,7 +66,6 @@ export const signIn = async (req, res, next) => {
         message: 'Invalid data supplied',
       });
     }
-    console.log('user:-', email);
 
     const user = await User.findOne({ where: { email } });
     if (!user) {
@@ -84,12 +84,17 @@ export const signIn = async (req, res, next) => {
     const Token = signToken(user.uuid);
 
     if (!user.dataValues.delinquent) {
+      //populate user role from roleid
+      const role = await model.Role.findOne({
+        where: { roleId: user.roleId },
+      });
       res.status(200).json({
         status: 'success',
         message: 'Logged In successfully!!',
         token: Token,
         data: {
           user,
+          role,
         },
       });
     } else {

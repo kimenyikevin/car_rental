@@ -2,6 +2,9 @@
 import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
+    static associate({ User }) {
+      this.hasMany(User, { foreignKey: 'roleId', as: 'users' });
+    }
     toJSON() {
       return {
         ...this.get(),
@@ -33,8 +36,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      tableName: 'roles',
-      modelName: 'roles',
+      tableName: 'role',
+      modelName: 'Role',
     },
   );
   return Role;
