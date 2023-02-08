@@ -41,3 +41,22 @@ export const createRole = async (req, res) => {
     });
   }
 };
+
+export const getAllRoles = async (req, res) => {
+  try {
+    const Roles = await Role.findAll();
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        Roles,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Error while fetching Roles',
+      err: error.message,
+    });
+  }
+};
