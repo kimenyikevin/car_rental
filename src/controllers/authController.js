@@ -6,7 +6,7 @@ import jwt from 'jsonwebtoken';
 const User = model.User;
 
 const signToken = (uuid) => {
-  return jwt.sign({ uuid }, process.env.JWT_SECRETE, {
+  return jwt.sign({ uuid }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };

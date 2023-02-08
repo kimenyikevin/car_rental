@@ -8,7 +8,6 @@ const Product = model.Product;
 
 export const createProduct = async (req, res) => {
   try {
-    console.log("req:---", req.body)
     const product = await Product.create(req.body);
     return res.status(201).json({
       product,
