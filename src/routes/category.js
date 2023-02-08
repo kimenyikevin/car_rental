@@ -1,5 +1,5 @@
 import express from 'express';
-
+import { Auth, admin } from '../utils/middlewares/Authmiddleware';
 import {
   createCategory,
   getCategory,
@@ -9,12 +9,12 @@ import {
 } from '../controllers/category';
 const router = express.Router();
 
-router.post('/', createCategory);
-router.get('/', getAllCategories);
+router.post('/', Auth, createCategory);
+router.get('/', Auth, getAllCategories);
 router
   .route('/:categoryid')
-  .get(getCategory)
-  .delete(deleteCategory)
-  .put(updateCategory);
+  .get(Auth, getCategory)
+  .delete(Auth, deleteCategory)
+  .put(Auth, updateCategory);
 
 export default router;

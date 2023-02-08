@@ -1,26 +1,10 @@
 'use strict';
-import { Model } from 'sequelize';
-module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
-    static associate({ Role }) {
-      this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
-    }
-    toJSON() {
-      return {
-        ...this.get(),
-        createdAt: undefined,
-        updatedAt: undefined,
-        password: undefined,
-        passwordResetToken: undefined,
-        isActive: undefined,
-      };
-    }
-  }
-  User.init(
-    {
+module.exports = {
+  async up(queryInterface, DataTypes) {
+    await queryInterface.createTable('users', {
       uuid: {
         type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
+        defaultValue: DataTypes.UUIV4,
         primaryKey: true,
       },
       firstName: {
@@ -51,12 +35,17 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         allowNull: false,
       },
-    },
-    {
-      sequelize,
-      tableName: 'users',
-      modelName: 'User',
-    },
-  );
-  return User;
+      createdAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: DataTypes.DATE,
+      },
+    });
+  },
+  async down(queryInterface, DataTypes) {
+    await queryInterface.dropTable('users');
+  },
 };

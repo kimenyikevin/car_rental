@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { signup, signIn } from '../controllers/authController';
+import { Auth, admin } from '../utils/middlewares/Authmiddleware';
 import {
   getAllUsers,
   getSingleUser,
@@ -9,9 +10,13 @@ import {
 } from '../controllers/users';
 const router = express.Router();
 
-router.post('/signup', signup);
 router.post('/signin', signIn);
-router.route('/').get(getAllUsers);
-router.route('/:uuid').get(getSingleUser).put(updateUser).delete(deleteUser);
+router.route('/signup').post(Auth, admin, signup);
+router.route('/').get(Auth, admin, getAllUsers);
+router
+  .route('/:uuid')
+  .get(Auth, admin, getSingleUser)
+  .put(Auth, admin, updateUser)
+  .delete(Auth, admin, deleteUser);
 
 export default router;
