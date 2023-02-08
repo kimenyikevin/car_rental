@@ -60,3 +60,30 @@ export const getAllRoles = async (req, res) => {
     });
   }
 };
+
+export const getRole = async (req, res) => {
+  try {
+    const { roleId } = req.params;
+    const role = await Role.findOne({ where: { roleId } });
+
+    if (!role) {
+      return res.status(404).json({
+        status: 'fail',
+        message: 'Role not found',
+      });
+    }
+
+    res.status(200).json({
+      status: 'success',
+      data: {
+        role,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'fail',
+      message: 'Error while fetching Role',
+      err: error.message,
+    });
+  }
+};
