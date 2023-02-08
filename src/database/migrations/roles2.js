@@ -11,7 +11,7 @@ module.exports = {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName: {
+      description: {
         type: DataTypes.STRING,
         allowNull: false,
       },
