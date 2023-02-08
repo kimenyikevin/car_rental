@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { signup, signIn } from '../controllers/authController';
-import { Auth } from '../utils/Authmiddleware';
+import { Auth, admin } from '../utils/Authmiddleware';
 import {
   getAllUsers,
   getSingleUser,
@@ -12,7 +12,7 @@ const router = express.Router();
 
 router.post('/signup', signup);
 router.post('/signin', signIn);
-router.route('/').get(Auth, getAllUsers);
+router.route('/').get(Auth, admin, getAllUsers);
 router
   .route('/:uuid')
   .get(Auth, getSingleUser)

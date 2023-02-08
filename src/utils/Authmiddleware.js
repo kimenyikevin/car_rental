@@ -33,11 +33,15 @@ const Auth = async (req, res, next) => {
 };
 
 const admin = (req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (
+    (req.user && req.user.roleName === 'admin') ||
+    req.user.roleName === 'developer'
+  ) {
     next();
   } else {
-    res.status(401);
-    throw new Error('Not Authorized for the Route');
+    res.status(401).send({
+      message: 'Not Authorized for the Route',
+    });
   }
 };
 export { Auth, admin };
