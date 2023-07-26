@@ -10,6 +10,7 @@ const db = {};
 
 let sequelize;
 
+console.log(config)
 
 if (config.url) {
   sequelize = new Sequelize(config.url, {
@@ -23,6 +24,7 @@ if (config.url) {
     config,
   );
 }
+
 
 readdirSync(__dirname)
   .filter(
