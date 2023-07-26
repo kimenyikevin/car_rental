@@ -11,8 +11,8 @@ import {
 const router = express.Router();
 
 router.post('/signin', signIn);
-router.route('/signup').post(Auth, admin, signup);
-router.route('/').get(Auth, admin, getAllUsers);
+router.route('/signup').post(Auth, signup);
+router.route('/').get(Auth, getAllUsers);
 router
   .route('/:uuid')
   .get(Auth, admin, getSingleUser)

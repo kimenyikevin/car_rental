@@ -19,11 +19,11 @@ const Auth = async (req, res, next) => {
         },
       });
       req.user = user;
-      req.role = await Role.findOne({
-        where: {
-          roleId: user.roleId,
-        },
-      });
+      // req.role = await Role.findOne({
+      //   where: {
+      //     roleId: user.roleId,
+      //   },
+      // });
       next();
     } catch (error) {
       console.log(error);

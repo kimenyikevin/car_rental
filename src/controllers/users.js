@@ -8,7 +8,7 @@ const User = model.User;
 // get all  users
 export const getAllUsers = async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await User.findAll({});
     res.status(200).json({
       status: 'success',
       users,

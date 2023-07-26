@@ -17,11 +17,15 @@ module.exports = {
       },
       email: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
+      },
+      phone: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       passwordResetToken: {
         type: DataTypes.STRING,
@@ -31,9 +35,13 @@ module.exports = {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      roleId: {
-        type: DataTypes.UUID,
-        allowNull: false,
+      // roleId: {
+      //   type: DataTypes.UUID,
+      //   allowNull: false,
+      // },
+      roleName: {
+        type: DataTypes.STRING,
+        allowNull: true,
       },
       createdAt: {
         allowNull: false,

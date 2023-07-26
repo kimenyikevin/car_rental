@@ -2,9 +2,9 @@
 import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Role }) {
-      this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
-    }
+    // static associate({ Role }) {
+    //   // this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
+    // }
     toJSON() {
       return {
         ...this.get(),
@@ -33,11 +33,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      phone: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       passwordResetToken: {
         type: DataTypes.STRING,
@@ -47,10 +51,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
       },
-      roleId: {
-        type: DataTypes.UUID,
-        allowNull: false,
-      },
+      // roleId: {
+      //   type: DataTypes.UUID,
+      //   allowNull: false,
+      // },
+      roleName: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      }
     },
     {
       sequelize,

@@ -13,16 +13,16 @@ const signToken = (uuid) => {
 
 export const signup = async (req, res, next) => {
   try {
-    const { firstName, lastName, email, roleId, password } = req.body;
+    const { firstName, lastName, phone } = req.body;
 
-    if (!firstName || !lastName || !email || !roleId || !password) {
+    if (!firstName || !lastName || !phone) {
       return res.status(400).json({
         status: 'fail',
         message: 'Invalid request, Provide valid information',
       });
     }
 
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { phone } });
 
     if (user) {
       return res.status(403).json({
@@ -34,9 +34,7 @@ export const signup = async (req, res, next) => {
     const newUser = await User.create({
       firstName,
       lastName,
-      email,
-      roleId,
-      password: await bcrypt.hash(password, 12),
+      phone
     });
 
     res.status(201).json({
@@ -68,6 +66,7 @@ export const signIn = async (req, res, next) => {
     }
 
     const user = await User.findOne({ where: { email } });
+
     if (!user) {
       return res.status(400).json({
         status: 'fail',
@@ -85,16 +84,15 @@ export const signIn = async (req, res, next) => {
 
     if (!user.dataValues.delinquent) {
       //populate user role from roleid
-      const role = await model.Role.findOne({
-        where: { roleId: user.roleId },
-      });
+      // const role = await model.Role.findOne({
+      //   where: { roleId: user.roleId },
+      // });
       res.status(200).json({
         status: 'success',
         message: 'Logged In successfully!!',
         token: Token,
         data: {
           user,
-          role,
         },
       });
     } else {

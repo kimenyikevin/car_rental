@@ -2,9 +2,9 @@
 import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class Role extends Model {
-    static associate({ User }) {
-      this.hasMany(User, { foreignKey: 'roleId', as: 'users' });
-    }
+    // static associate({ User }) {
+    //   this.hasMany(User, { foreignKey: 'roleId', as: 'users' });
+    // }
     toJSON() {
       return {
         ...this.get(),
