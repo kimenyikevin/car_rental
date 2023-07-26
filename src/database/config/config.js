@@ -25,9 +25,9 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     dialect: 'postgres',
     port: process.env.PORT,
-    sendgridAPIKey: process.env.SENGRID_API_KEY,
-    senderEmail: process.env.SENDER_EMAIL,
-    hashPassNum: process.env.HASH_PASSWORD_SALT,
+    // sendgridAPIKey: process.env.SENGRID_API_KEY,
+    // senderEmail: process.env.SENDER_EMAIL,
+    // hashPassNum: process.env.HASH_PASSWORD_SALT,
 
   },
 };
