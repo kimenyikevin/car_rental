@@ -7,7 +7,7 @@
   },
   "main": "server.js",
   "scripts": {
-    "start": "babel-node ./src/server.js",
+    "start": "node --require @babel/polyfill --require @babel/register ./src/server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/server.js",
     "test": "NODE_ENV=test npx jest",
     "migrate": "npx sequelize-cli db:migrate",
