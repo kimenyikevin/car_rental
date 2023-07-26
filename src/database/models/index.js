@@ -10,6 +10,8 @@ const db = {};
 
 let sequelize;
 
+console.log("...................", config)
+
 if (config.url) {
   sequelize = new Sequelize(config.url, {
     dialect: 'postgres',
