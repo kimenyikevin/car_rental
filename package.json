@@ -13,7 +13,7 @@
     "migrate": "npx sequelize-cli db:migrate",
     "undo-migrate": "sequelize-cli db:migrate:undo",
     "undo-all-migration": "sequelize-cli db:migrate:undo:all",
-    "seed": "npx sequelize-cli db:seed:all",
+    "seed": "npm start && npx sequelize-cli db:seed:all",
     "undo-seed": "npx sequelize-cli db:seed:undo:all",
     "build": "babel src -d dist"
   },
