@@ -19,7 +19,7 @@ module.exports = {
   },
   production: {
     JWT_SECRET: process.env.JWT_SECRET,
-    url: process.env.DATABASE_URL,
+    // url: process.env.DATABASE_URL,
     database: process.env.DATABASE,
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
