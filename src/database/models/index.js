@@ -10,7 +10,6 @@ const db = {};
 
 let sequelize;
 
-console.log(config)
 
 if (config.url) {
   sequelize = new Sequelize(config.url, {
@@ -57,5 +56,14 @@ sequelize
   .catch((err) => {
     console.error('Failed to connect! Database Status : OFF:', err);
   });
+
+(async () => {
+  try {
+    await sequelize.sync({ alter: true });
+    console.log('Database synchronized successfully.');
+  } catch (error) {
+    console.error('Error synchronizing the database:', error);
+  }
+})();
 
 export default db;
