@@ -19,7 +19,7 @@ module.exports = {
   },
   production: {
     JWT_SECRET: process.env.JWT_SECRET,
-    url: process.env.PROD_DB_URL,
+    url: process.env.DATABASE_URL,
     dialect: 'postgres',
     port: process.env.PORT,
     sendgridAPIKey: process.env.SENGRID_API_KEY,
