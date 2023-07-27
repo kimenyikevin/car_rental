@@ -7,9 +7,9 @@ import {
 } from '../controllers/expensesController';
 const router = express.Router();
 
-router.post('/', creatExpenses);
-router.get('/capital', getExpensesByName);
-router.get('/daily', getDailyExpenses);
+router.post('/', Auth, creatExpenses);
+router.get('/capital', Auth, getExpensesByName);
+router.get('/daily', Auth, getDailyExpenses);
 
 
 

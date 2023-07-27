@@ -7,9 +7,9 @@ import {
 } from '../controllers/reportController';
 const router = express.Router();
 
-router.post('/', creteReport);
-router.get('/', getDailyRepport);
-router.get('/count', getAllreportAndCount);
+router.post('/', Auth, creteReport);
+router.get('/', Auth, getDailyRepport);
+router.get('/count', Auth, getAllreportAndCount);
 
 
 export default router;

@@ -7,9 +7,9 @@ import {
 } from '../controllers/creaditController';
 const router = express.Router();
 
-router.post('/', creatCredit);
-router.get('/user', getCreditByUser);
-router.get('/daily', getDailyCredit);
+router.post('/', Auth, creatCredit);
+router.get('/user', Auth, getCreditByUser);
+router.get('/daily', Auth, getDailyCredit);
 
 
 
