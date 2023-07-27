@@ -92,3 +92,32 @@ export const getExpensesByName = async (req, res) => {
         });
     }
 };
+
+
+export const removeExpenses = async (req, res) => {
+    try {
+        const expense = await Expenses.findOne({
+            where: {
+                uuid: req.params.id,
+            },
+        });
+        if (!expense) {
+            return res.status(404).json({
+                status: 'error',
+                error: 'Expense not found',
+            });
+        }
+
+        await expense.destroy();
+        res.status(200).json({
+            status: 'success',
+            message: 'Expenses deleted successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'fail',
+            message: 'Error while fetching categories',
+            err: error.message,
+        });
+    }
+};

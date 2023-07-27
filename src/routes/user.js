@@ -15,8 +15,8 @@ router.route('/signup').post(signup);
 router.route('/').get(getAllUsers);
 router
   .route('/:uuid')
-  .get(Auth, admin, getSingleUser)
-  .put(Auth, admin, updateUser)
-  .delete(Auth, admin, deleteUser);
+  .get(Auth, getSingleUser)
+  .put(Auth, updateUser)
+  .delete(Auth, deleteUser);
 
 export default router;
