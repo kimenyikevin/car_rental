@@ -12,44 +12,50 @@ const signToken = (uuid) => {
 };
 
 export const signup = async (req, res, next) => {
-  try {
-    const { firstName, lastName, phone } = req.body;
+  // try {s
+  let { firstName, lastName, phone, email, password } = req.body;
 
-    if (!firstName || !lastName || !phone) {
-      return res.status(400).json({
-        status: 'fail',
-        message: 'Invalid request, Provide valid information',
-      });
-    }
-
-    const user = await User.findOne({ where: { phone } });
-
-    if (user) {
-      return res.status(403).json({
-        status: 'fail',
-        message: 'User already exist',
-      });
-    }
-
-    const newUser = await User.create({
-      firstName,
-      lastName,
-      phone
-    });
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        users: newUser,
-      },
-    });
-  } catch (error) {
-    res.status(500).json({
+  if (!firstName || !lastName || !phone) {
+    return res.status(400).json({
       status: 'fail',
-      message: 'Error while creating a user',
-      err: error.message,
+      message: 'Invalid request, Provide valid information',
     });
   }
+
+  const user = await User.findOne({ where: { phone } });
+
+  if (user) {
+    return res.status(403).json({
+      status: 'fail',
+      message: 'User already exist',
+    });
+  }
+
+  email = email ? email : '';
+  password = password ? password : '';
+
+  console.log(email, password)
+  const newUser = await User.create({
+    firstName,
+    lastName,
+    phone,
+    email,
+    password
+  });
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      users: newUser,
+    },
+  });
+  // } catch (error) {
+  //   res.status(500).json({
+  //     status: 'fail',
+  //     message: 'Error while creating a user',
+  //     err: error.message,
+  //   });
+  // }
 };
 
 export const signIn = async (req, res, next) => {
@@ -73,7 +79,8 @@ export const signIn = async (req, res, next) => {
         message: 'User is not  registered',
       });
     }
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+
+    if (!user || !(password === user.password)) {
       return res.status(403).json({
         status: 'fail',
         message: 'Invalid email or password',
