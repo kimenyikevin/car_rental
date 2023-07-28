@@ -95,3 +95,32 @@ export const getAllreportAndCount = async (req, res) => {
         });
     }
 }
+
+
+export const removeReport = async (req, res) => {
+    try {
+        const report = await Report.findOne({
+            where: {
+                uuid: req.params.id,
+            },
+        });
+        if (!report) {
+            return res.status(404).json({
+                status: 'error',
+                error: 'Report not found',
+            });
+        }
+
+        await report.destroy();
+        res.status(200).json({
+            status: 'success',
+            message: 'Report deleted successfully',
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: 'fail',
+            message: 'Error while fetching categories',
+            err: error.message,
+        });
+    }
+};
