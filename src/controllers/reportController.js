@@ -5,7 +5,7 @@ const Report = model.Report;
 
 export const creteReport = async (req, res) => {
     try {
-        const { beverage, food, damages, tokenBiyali, expenses, momo, pos, credit, cash } = req.body;
+        const { beverage, food, damages, tokenBiyali, expenses, pos, credit } = req.body;
         const totalRecieved = (Number(beverage) + Number(food) + Number(tokenBiyali)) - Number(expenses) - Number(credit) - Number(damages);
 
 
@@ -32,7 +32,7 @@ export const creteReport = async (req, res) => {
             });
         }
         const newReport = await Report.create({
-            beverage, food, damages, tokenBiyali, expenses, momo, pos, credit, cash, totalRecieved
+            beverage, food, damages, tokenBiyali, expenses, pos, credit, totalRecieved,
         });
 
         return res.status(201).json({
@@ -77,8 +77,6 @@ export const getAllreportAndCount = async (req, res) => {
                 [Sequelize.fn('SUM', Sequelize.col('expenses')), 'expenses'],
                 [Sequelize.fn('SUM', Sequelize.col('pos')), 'pos'],
                 [Sequelize.fn('SUM', Sequelize.col('credit')), 'credit'],
-                [Sequelize.fn('SUM', Sequelize.col('momo')), 'momo'],
-                [Sequelize.fn('SUM', Sequelize.col('cash')), 'cash'],
                 [Sequelize.fn('SUM', Sequelize.col('totalRecieved')), 'totalRecieved']
             ],
             raw: true,
