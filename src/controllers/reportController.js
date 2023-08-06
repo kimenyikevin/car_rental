@@ -32,7 +32,7 @@ export const creteReport = async (req, res) => {
             });
         }
         const newReport = await Report.create({
-            beverage, food, damages, tokenBiyali, expenses, pos, credit, totalRecieved,
+            beverage, food, damages, tokenBiyali, expenses, pos, credit, cash: 0, momo: 0, totalRecieved,
         });
 
         return res.status(201).json({
