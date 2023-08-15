@@ -25,7 +25,7 @@ export const creteReport = async (req, res) => {
         });
 
         const dataCreatedToday = result.count > 0;
-        if (dataCreatedToday && createdAt) {
+        if (dataCreatedToday && !createdAt) {
             return res.status(401).json({
                 status: 'fail',
                 message: 'Report has been created today',
