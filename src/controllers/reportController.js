@@ -5,7 +5,7 @@ const Report = model.Report;
 
 export const creteReport = async (req, res) => {
     try {
-        const { beverage, food, damages, tokenBiyali, expenses, pos, credit } = req.body;
+        const { beverage, food, damages, tokenBiyali, expenses, pos, credit, createdAt } = req.body;
         const totalRecieved = (Number(beverage) + Number(food) + Number(tokenBiyali)) - Number(expenses) - Number(credit) - Number(damages);
 
 
@@ -33,6 +33,7 @@ export const creteReport = async (req, res) => {
         }
         const newReport = await Report.create({
             beverage, food, damages, tokenBiyali, expenses, pos, credit, cash: 0, momo: 0, totalRecieved,
+            createdAt: createdAt || today
         });
 
         return res.status(201).json({
