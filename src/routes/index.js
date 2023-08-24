@@ -6,6 +6,7 @@ import role from './role';
 import report from './report';
 import credit from './credit';
 import expenses from './expenses';
+import foodMenu from './foodMenu';
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/role', role);
 router.use('/report', report);
 router.use('/credit', credit);
 router.use('/expenses', expenses);
+router.use('/foodMenu', foodMenu);
 
 export default router;
