@@ -7,7 +7,7 @@ import {
 const router = express.Router();
 
 router.post('/', Auth, creatFoodMenu);
-router.get('/', Auth, getAllFoodMenu);
+router.get('/', getAllFoodMenu);
 
 
 
