@@ -66,10 +66,11 @@ export const getAllFoodMenu = async (req, res) => {
     try {
         const foodMenu = await FoodMenu.findAll({});
 
+       const sortedData = foodMenu.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
 
         return res.status(200).json({
-            status: 'success',
-            data: foodMenu,
+          status: 'success',
+          data: sortedData,
         });
     } catch (error) {
         res.status(500).json({
