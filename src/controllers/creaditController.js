@@ -6,10 +6,6 @@ const Credit = model.Credit;
 export const creatCredit = async (req, res) => {
     try {
         const { name, amount, comment, paidAmount, date } = req.body;
-
-
-
-
         const targetDate = new Date(date);
 
         // Get the start and end timestamps of the target date
@@ -72,14 +68,7 @@ export const getDailyCredit = async (req, res) => {
 
 export const getCreditByUser = async (req, res) => {
     try {
-        const startDate = new Date();
-        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
         const credit = await Credit.findAll({
-            where: {
-                createdAt: {
-                  [Op.gte]: startDate,
-                },
-              },
             attributes: [
                 'name',
                 [Sequelize.fn('SUM', Sequelize.col('amount')), 'totalCredit'],
