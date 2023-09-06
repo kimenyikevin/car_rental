@@ -53,17 +53,7 @@ export const creatExpenses = async (req, res) => {
 
 export const getDailyExpenses = async (req, res) => {
     try {
-        const startDate = new Date();
-        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
-        const expenses = await Expenses.findAll({
-            where: {
-                createdAt: {
-                  [Op.gte]: startDate,
-                },
-              },
-        });
-
-
+        const expenses = await Expenses.findAll({ });
         return res.status(200).json({
             status: 'success',
             data: expenses,
@@ -80,7 +70,14 @@ export const getDailyExpenses = async (req, res) => {
 
 export const getExpensesByName = async (req, res) => {
     try {
+        const startDate = new Date();
+        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
         const expenses = await Expenses.findAll({
+            where: {
+                createdAt: {
+                  [Op.gte]: startDate,
+                },
+              },
             attributes: [
                 'name',
                 [Sequelize.fn('SUM', Sequelize.col('amount')), 'totalExpenses'],
