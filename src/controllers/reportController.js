@@ -69,7 +69,15 @@ export const getDailyRepport = async (req, res) => {
 
 export const getAllreportAndCount = async (req, res) => {
     try {
+
+        const startDate = new Date();
+        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
         const result = await Report.findAll({
+            where: {
+                createdAt: {
+                  [Op.gte]: startDate,
+                },
+              },
             attributes: [
                 [Sequelize.fn('SUM', Sequelize.col('beverage')), 'beverage'],
                 [Sequelize.fn('SUM', Sequelize.col('food')), 'food'],
