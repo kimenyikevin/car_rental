@@ -53,12 +53,12 @@ export const creatExpenses = async (req, res) => {
 
 export const getDailyExpenses = async (req, res) => {
     try {
-        const startDate = new Date();
-        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
+        const currentDate = new Date();
+        const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const expenses = await Expenses.findAll({ 
             where: {
                 createdAt: {
-                  [Op.gte]: fn('DATE', col('createdAt')) >= startDate,
+                  [Op.gte]: startOfMonth,
                 },
               }
         });
