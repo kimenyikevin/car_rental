@@ -70,12 +70,12 @@ export const getDailyRepport = async (req, res) => {
 export const getAllreportAndCount = async (req, res) => {
     try {
 
-        const startDate = new Date();
-        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
+        const currentDate = new Date();
+        const startOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const result = await Report.findAll({
             where: {
                 createdAt: {
-                  [Op.gte]: startDate,
+                  [Op.gte]: startOfMonth,
                 },
               },
             attributes: [
