@@ -53,7 +53,15 @@ export const creatExpenses = async (req, res) => {
 
 export const getDailyExpenses = async (req, res) => {
     try {
-        const expenses = await Expenses.findAll({});
+        const startDate = new Date();
+        startDate.setDate(1); // Set the day to 1 to represent the start of the current month
+        const expenses = await Expenses.findAll({
+            where: {
+                createdAt: {
+                  [Op.gte]: startDate,
+                },
+              },
+        });
 
 
         return res.status(200).json({
