@@ -2,6 +2,9 @@
 import { Model, Sequelize } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
     class FoodMenu extends Model {
+           static associate({ FoodMenuCategory }) {
+            this.belongsTo(FoodMenuCategory, { foreignKey: 'foodMenuCategoryId', as: 'categoryMenu' });
+        }
         toJSON() {
             return {
                 ...this.get()
@@ -27,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            foodMenuCategoryId: {
+             type: DataTypes.UUID,
+             allowNull: true,
+            }
         },
         {
             sequelize,
