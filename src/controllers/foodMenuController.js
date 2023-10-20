@@ -137,7 +137,7 @@ export const deleteFoodMenuCategory =  async (req, res) => {
   try {
     const category = await FoodMenuCategory.findOne({
         where: {
-            uuid: req.params.id,
+          foodMenuCategoryId: req.params.id,
         },
     });
     if (!category) {
