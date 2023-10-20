@@ -5,7 +5,8 @@ import {
     getAllFoodMenu,
     updateFoodMenu,
     creatFoodMenuCategory,
-    getAllFoodMenuCategory
+    getAllFoodMenuCategory,
+    deleteFoodMenuCategory
 } from '../controllers/foodMenuController';
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.put('/:id', Auth, updateFoodMenu);
 router.get('/:id', getAllFoodMenu);
 router.post('/category', Auth, creatFoodMenuCategory)
 router.get('/all/category', getAllFoodMenuCategory)
+router.delete('/category/:id', deleteFoodMenuCategory)
 
 
 

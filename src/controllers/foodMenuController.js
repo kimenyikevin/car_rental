@@ -132,3 +132,31 @@ export const getAllFoodMenuCategory = async (req, res) => {
       });
   }
 };
+
+export const deleteFoodMenuCategory =  async (req, res) => {
+  try {
+    const category = await FoodMenuCategory.findOne({
+        where: {
+            uuid: req.params.id,
+        },
+    });
+    if (!category) {
+        return res.status(404).json({
+            status: 'error',
+            error: 'category not found',
+        });
+    }
+
+    await category.destroy();
+    res.status(200).json({
+        status: 'success',
+        message: 'Category deleted successfully',
+    });
+} catch (error) {
+    res.status(500).json({
+        status: 'fail',
+        message: 'Error while fetching categories',
+        err: error.message,
+    });
+}
+}
