@@ -51,7 +51,7 @@ export const updateFoodMenuCategory = async (req, res) => {
 
     const foodMenuCategory = await FoodMenuCategory.findOne({
       where: {
-        uuid: req.params.id
+        foodMenuCategoryId: req.params.id
       }
     });
 
