@@ -15,7 +15,7 @@ router.post('/', Auth, creatFoodMenu);
 router.put('/:id', Auth, updateFoodMenu);
 router.get('/:id', getAllFoodMenu);
 router.post('/category', Auth, creatFoodMenuCategory)
-router.put('/category', Auth, updateFoodMenuCategory)
+router.put('/category/:id', Auth, updateFoodMenuCategory)
 router.get('/all/category', getAllFoodMenuCategory)
 router.delete('/category/:id', deleteFoodMenuCategory)
 
