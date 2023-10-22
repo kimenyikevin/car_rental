@@ -125,9 +125,9 @@ export const getAllFoodMenu = async (req, res) => {
   try {
     const id = req.params.id;
     const foodMenu = await FoodMenu.findAll({
-      // where: {
-      //   foodMenuCategoryId: id
-      // }
+      where: {
+        foodMenuCategoryId: id
+      }
     });
 
     const sortedData = foodMenu.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
