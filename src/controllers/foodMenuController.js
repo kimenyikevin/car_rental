@@ -127,6 +127,10 @@ export const getAllFoodMenu = async (req, res) => {
     const foodMenu = await FoodMenu.findAll({
       where: {
         foodMenuCategoryId: id
+      },
+      include: {
+        model: FoodMenuCategory,
+        as: 'categoryMenu',
       }
     });
 
