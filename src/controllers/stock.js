@@ -18,7 +18,7 @@ export const createStock = async (req, res) => {
     
      // Set the end date to end of the day (11:59:59 PM)
      endDate.setHours(23, 59, 59, 999);
-     const dataOnDate = await YourModel.findAll({
+     const dataOnDate = await Stock.findAll({
       where: {
         createdAt: {
           [Op.between]: [startDate, endDate],
