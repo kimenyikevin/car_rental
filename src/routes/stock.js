@@ -13,6 +13,7 @@ router.post('/', Auth, createStock);
 router.get('/', Auth, getAllStock);
 router.get('/:id', Auth, getStockById);
 router.delete('/:id', Auth, deleteStock);
+router.patch('/:id', Auth, updateStock);
 
 
 
