@@ -7,6 +7,7 @@ import report from './report';
 import credit from './credit';
 import expenses from './expenses';
 import foodMenu from './foodMenu';
+import stock from './stock';
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use('/report', report);
 router.use('/credit', credit);
 router.use('/expenses', expenses);
 router.use('/foodMenu', foodMenu);
+router.use('/stock', stock);
 
 export default router;
