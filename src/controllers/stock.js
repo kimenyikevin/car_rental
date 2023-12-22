@@ -69,7 +69,9 @@ export const CreateOpeningStock = async (req, res) => {
 
 export const getAllStock = async (req, res) => {
   try {
-    const stock = await Stock.findAll();
+    const stock = await Stock.findAll(
+      {order: [['createdAt', 'DESC']]}
+    );
     const data = {};
     stock.forEach(el=> {
         const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
