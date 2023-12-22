@@ -3,11 +3,22 @@
 'use strict';
 
 import model from '../database/models';
-import { Op, literal } from 'sequelize';
+import { Op } from 'sequelize';
 
 const Stock = model.Stock;
 
 export const createStock = async (req, res) => {
+  try {
+    const stock = await Stock.create(req.body);
+    return res.status(201).json({
+      stock,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
+export const CreateOpeningStock = async (req, res) => {
   try {
     const closingDate = req.body.closingDate
     const startDate = new Date(closingDate);
@@ -31,21 +42,25 @@ export const createStock = async (req, res) => {
     } 
 
     const stock = dataOnDate.map(record => record.toJSON())
+
+
+    const results = await Promise.all(stock.map(async (item) => {
+           const result =  await Stock.create({
+            name: item.name,
+            opening: item.closing,
+            added: 0,
+            total: item.closing,
+            closing: 0,
+            sales: 0,
+            unit_price: Number(item.unit_price),
+            total_price: Number(item.unit_price) * 0
+          });
+           return result;
+    }))
         return res.status(201).json({
-      stock
+      results
     });
-    // const total = opening ? (Number(one.opening) + Number(req.body.added)) : 0;
-    // const sales = total - Number(req.body.closing);
-    // const stock = await Stock.create({
-    //   name: req.body.name,
-    //   opening: opening,
-    //   added: req.body.added,
-    //   total: total,
-    //   closing: req.body.closing,
-    //   sales:  sales,
-    //   unit_price: Number(req.body.unit_price),
-    //   total_price: Number(req.body.unit_price) * sales
-    // });
+
 
   } catch (error) {
     return res.status(500).json({ error: error.message });

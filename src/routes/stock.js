@@ -5,11 +5,13 @@ import {
     getAllStock,
     getStockById,
     updateStock,
-    deleteStock
+    deleteStock,
+    CreateOpeningStock
 } from '../controllers/stock';
 const router = express.Router();
 
 router.post('/', Auth, createStock);
+router.post('/opening', Auth, CreateOpeningStock);
 router.get('/', Auth, getAllStock);
 router.get('/:id', Auth, getStockById);
 router.delete('/:id', Auth, deleteStock);
