@@ -22,10 +22,13 @@ export const getAllStock = async (req, res) => {
     const stock = await Stock.findAll();
     const data = {};
     stock.forEach(el=> {
-        if(!data[el.createdAt]){
-            data[el.createdAt] = [el];
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const timeDate = new Date(el.createdAt);
+        const formattedDate = timeDate.toLocaleDateString('en-US', options);
+        if(!data[formattedDate]){
+            data[formattedDate] = [el];
         } else {
-            data[el.createdAt].push(el);
+            data[formattedDate].push(el);
         }
     });
     return res.status(200).json({ data });
