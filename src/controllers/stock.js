@@ -119,7 +119,7 @@ export const updateStock = async (req, res) => {
       unit_price: Number(req.body.unit_price),
       total_price: Number(req.body.unit_price) * sales
     }, {
-      where: { productid: id },
+      where: { stockId: id },
     });
     if (updated) {
       const updatedStock = await Stock.findOne({
