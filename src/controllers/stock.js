@@ -3,15 +3,38 @@
 'use strict';
 
 import model from '../database/models';
+import { Op, literal } from 'sequelize';
 
 const Stock = model.Stock;
 
 export const createStock = async (req, res) => {
   try {
-    const stock = await Stock.create(req.body);
-    return res.status(201).json({
-      stock,
+    const closingDate = req.body.closingDate
+    const dataOnDate = await Stock.findAll({
+      where: literal(`DATE(createdAt) = '${closingDate}'`),
     });
+
+     if (dataOnDate.length === 0) {
+    return res.status(404).json({ error:"No data found on the specified date."});
+    } 
+
+    const stock = dataOnDate.map(record => record.toJSON())
+        return res.status(201).json({
+      stock
+    });
+    // const total = opening ? (Number(one.opening) + Number(req.body.added)) : 0;
+    // const sales = total - Number(req.body.closing);
+    // const stock = await Stock.create({
+    //   name: req.body.name,
+    //   opening: opening,
+    //   added: req.body.added,
+    //   total: total,
+    //   closing: req.body.closing,
+    //   sales:  sales,
+    //   unit_price: Number(req.body.unit_price),
+    //   total_price: Number(req.body.unit_price) * sales
+    // });
+
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -57,7 +80,18 @@ export const getStockById = async (req, res) => {
 export const updateStock = async (req, res) => {
   try {
     const { id } = req.params;
-    const [updated] = await Stock.update(req.body, {
+    const total = Number(req.body.opening) + Number(req.body.added);
+    const sales = total - Number(req.body.closing);
+    const [updated] = await Stock.update({
+      name: req.body.name,
+      opening: Number(req.body.opening),
+      added: Number(req.body.added),
+      total: total,
+      closing: Number(req.body.closing),
+      sales:  sales,
+      unit_price: Number(req.body.unit_price),
+      total_price: Number(req.body.unit_price) * sales
+    }, {
       where: { productid: id },
     });
     if (updated) {
