@@ -20,7 +20,15 @@ export const createStock = async (req, res) => {
 export const getAllStock = async (req, res) => {
   try {
     const stock = await Stock.findAll();
-    return res.status(200).json({ stock });
+    const data = {};
+    stock.forEach(el=> {
+        if(!data[el.createdAt]){
+            data[el.createdAt] = [el];
+        } else {
+            data[el.createdAt].push(el);
+        }
+    });
+    return res.status(200).json({ data });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
