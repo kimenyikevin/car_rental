@@ -4,15 +4,30 @@
 
 import model from '../database/models';
 import { Op } from 'sequelize';
+import  ExcelJS  from 'exceljs';
 
 const Stock = model.Stock;
 
 export const createStock = async (req, res) => {
   try {
     const stock = await Stock.create(req.body);
+     // Load the workbook from an Excel file
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile('Click menu.xlsx');
+    // Access the first worksheet
+  const worksheet = workbook.getWorksheet(1);
+
+   worksheet.eachRow(async (row, rowNumber) => {
+    if (rowNumber !== 1) {  
     return res.status(201).json({
-      stock,
+      stock: row.values
     });
+    }
+  });
+
+    // return res.status(201).json({
+    //   stock,
+    // });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
