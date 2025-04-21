@@ -9,8 +9,8 @@ import {
 } from '../controllers/category';
 const router = express.Router();
 
-router.post('/', Auth, createCategory);
-router.get('/', Auth, getAllCategories);
+router.post('/', createCategory);
+router.get('/', getAllCategories);
 router
   .route('/:categoryid')
   .get(Auth, getCategory)

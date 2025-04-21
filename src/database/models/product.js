@@ -4,8 +4,9 @@ import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     //associations with category model
-    static associate({ Category }) {
+    static associate({ Category, User }) {
       this.belongsTo(Category, { foreignKey: 'categoryid', as: 'category' });
+      this.belongsTo(User, { foreignKey: 'userid', as: 'users' });
     }
 
     toJSON() {
@@ -26,11 +27,15 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      userid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       categoryid: {
         type: DataTypes.UUID,
         allowNull: false,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -42,12 +47,24 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      sale_price: {
-        type: DataTypes.DECIMAL,
+      model: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      currency: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      url: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       quantity: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      year_registration: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       isActive: {

@@ -7,7 +7,7 @@ module.exports = {
     JWT_SECRET: process.env.JWT_SECRET,
     url: process.env.DATABASE_URL,
     dialect: 'postgres',
-    database: 'click_bar_db',
+    database: 'postgres',
     port: process.env.PORT,
     senderEmail: process.env.SENDER_EMAIL,
     hashPassNum: process.env.HASH_PASSWORD_SALT,

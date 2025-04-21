@@ -2,9 +2,9 @@
 import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    // static associate({ Role }) {
-    //   // this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
-    // }
+    static associate({ Product }) {
+        this.hasMany(Product, { foreignKey: 'userid', as: 'users' });
+    }
     toJSON() {
       return {
         ...this.get(),
@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      uuid: {
+      userid: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,

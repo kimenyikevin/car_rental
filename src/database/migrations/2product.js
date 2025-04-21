@@ -7,11 +7,15 @@ module.exports = {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
+      ownerid: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
       categoryid: {
         type: DataTypes.UUID,
         allowNull: false,
       },
-      name: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -23,12 +27,25 @@ module.exports = {
         type: DataTypes.DECIMAL,
         allowNull: false,
       },
-      sale_price: {
-        type: DataTypes.DECIMAL,
+      model: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
+      currency: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      
       quantity: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      year_registration: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       isActive: {

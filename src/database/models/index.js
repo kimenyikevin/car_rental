@@ -11,14 +11,15 @@ const db = {};
 let sequelize;
 
 
+console.log(config)
 if (config.url) {
   sequelize = new Sequelize(config.url, {
     dialect: 'postgres',
-    dialectOptions: {
-      ssl: {
-        rejectUnauthorized: false, // Required to accept self-signed certificate from Heroku
-      },
-    },
+    // dialectOptions: {
+    //   ssl: {
+    //     rejectUnauthorized: false, // Required to accept self-signed certificate from Heroku
+    //   },
+    // },
   });
 } else {
   sequelize = new Sequelize(
