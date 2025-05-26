@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     //associations with category model
     static associate({ Category, User }) {
       this.belongsTo(Category, { foreignKey: 'categoryid', as: 'category' });
-      this.belongsTo(User, { foreignKey: 'userid', as: 'users' });
+      this.belongsTo(User, { foreignKey: 'userid', as: 'user',  onDelete: 'CASCADE' });
     }
 
     toJSON() {

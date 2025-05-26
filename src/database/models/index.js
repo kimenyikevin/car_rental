@@ -1,7 +1,7 @@
 import { readdirSync } from 'fs';
 import { basename as _basename, join } from 'path';
 import Sequelize, { DataTypes } from 'sequelize';
-import prop from '../config/config';
+import prop from '../config/config.cjs';
 
 const basename = _basename(__filename);
 const env = process.env.NODE_ENV || 'development';

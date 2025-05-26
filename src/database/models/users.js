@@ -3,7 +3,7 @@ import { Model } from 'sequelize';
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate({ Product }) {
-        this.hasMany(Product, { foreignKey: 'userid', as: 'users' });
+        this.hasMany(Product, { foreignKey: 'userid', as: 'products', onDelete: 'CASCADE' });
     }
     toJSON() {
       return {

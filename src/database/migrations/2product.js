@@ -7,7 +7,7 @@ module.exports = {
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
       },
-      ownerid: {
+      userid: {
         type: DataTypes.UUID,
         allowNull: false,
       },
